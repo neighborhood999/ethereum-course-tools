@@ -4,10 +4,10 @@ NETWORK_NAME := "net99"
 RPC_PORT := 8545
 PORT := 30303
 
-all: pull create-dir build
+all: pull create build
 
-.PHONY: create-dir
-create-dir:
+.PHONY: create
+create:
 	@cd ~ \
 	&& mkdir $(DIRNAME)  \
 	&& cp $(PWD)/build.sh $(PWD)/genesis.json $(HOME)/$(DIRNAME)
@@ -23,7 +23,7 @@ pull:
 .PHONY: build
 build:
 	@docker run -d --entrypoint "/root/build.sh" \
-    --name $(CONTAINER_NAME) \
+		--name $(CONTAINER_NAME) \
 		-v $(HOME)/$(DIRNAME):/root \
 		-p $(RPC_PORT):8545 -p $(PORT):30303 \
 		ethereum/client-go
@@ -32,3 +32,6 @@ build:
 attach:
 	@docker exec -it $(CONTAINER_NAME) geth attach ipc:/root/.ethereum/$(NETWORK_NAME)/geth.ipc
 
+.PHONY: clean
+clean:
+	rm -rf $(HOME)/$(DIRNAME)
