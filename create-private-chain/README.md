@@ -2,17 +2,19 @@
 
 ## Usage
 
+Build the image by Dockerfile and running container:
+
 ```shell
 $ make
 ```
 
-Check container is created:
+Check container status:
 
 ```shell
 $ docker ps
 
-CONTAINER ID        IMAGE                COMMAND             CREATED             STATUS              PORTS                                                                   NAMES
-b372baa7b13e        ethereum/client-go   "/root/build.sh"    5 seconds ago       Up 4 seconds        0.0.0.0:8545->8545/tcp, 0.0.0.0:30303->30303/tcp, 8546/tcp, 30303/udp   eth-private-node
+CONTAINER ID        IMAGE                                          COMMAND             CREATED             STATUS              PORTS                                                                   NAMES
+13a75e2c4cc1        neighborhood999/ethereum-private-chain:1.0.0   "./build.sh"        15 seconds ago      Up 14 seconds       0.0.0.0:8545->8545/tcp, 0.0.0.0:30303->30303/tcp, 8546/tcp, 30303/udp   ethereum-private-node
 ```
 
 ## JavaScript Console

@@ -1,35 +1,24 @@
-DIRNAME := "eth-private-chain"
-CONTAINER_NAME := "eth-private-node"
+IMAGE_NAME := "neighborhood999/ethereum-private-chain:1.0.0"
+CONTAINER_NAME := "ethereum-private-node"
 NETWORK_NAME := "net99"
 RPC_PORT := 8545
 PORT := 30303
 
-all: pull create build
+all: build run
 
-# Create directonary and copy build.sh & genesis.json
-create:
-	@cd ~ && \
-	mkdir $(DIRNAME)  && \
-	cp $(PWD)/build.sh $(PWD)/genesis.json $(HOME)/$(DIRNAME)
-.PHONY: create
-
-# Pull docker images
-pull:
-	@if test ! -z $(docker images -q ethereum/client-go:latest); then \
-		@docker pull ethereum/client-go; \
-	else \
-		echo "\033[0;32methereum/client-go:latest image is exist.\033[0m"; \
-	fi
-.PHONY: pull
-
-# Build container by ethereum/client-go
+# Build docker images
 build:
-	@docker run -d --entrypoint "/root/build.sh" \
-		--name $(CONTAINER_NAME) \
-		-v $(HOME)/$(DIRNAME):/root \
-		-p $(RPC_PORT):8545 -p $(PORT):30303 \
-		ethereum/client-go
+	@docker build -t $(IMAGE_NAME) .
 .PHONY: build
+
+# Running container
+run:
+	@docker run -d \
+		--name $(CONTAINER_NAME) \
+		-v $(PWD)/.ethereum:/root/.ethereum \
+		-p $(RPC_PORT):8545 -p $(PORT):30303 \
+		$(IMAGE_NAME)
+.PHONY: run
 
 # Execute geth
 attach:
@@ -38,5 +27,5 @@ attach:
 
 # Clean directonary
 clean:
-	rm -rf $(HOME)/$(DIRNAME)
+	rm -rf $(PWD)/.ethereum
 .PHONY: clean
