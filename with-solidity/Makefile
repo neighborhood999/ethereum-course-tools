@@ -25,10 +25,15 @@ run:
 		$(IMAGE_NAME)
 .PHONY: run
 
-# Execute geth
+# geth attch
 attach:
 	@docker exec -it $(CONTAINER_NAME) geth attach ipc:/root/.ethereum/$(NETWORK_NAME)/geth.ipc
 .PHONY: attach
+
+# solc
+solc:
+	@docker exec -it ethereum-private-node /bin/sh
+.PHONY: solc
 
 # Clean directonary
 clean:

@@ -26,7 +26,7 @@ run:
 		$(IMAGE_NAME)
 .PHONY: run
 
-# Execute geth
+# geth attach
 attach:
 	@docker exec -it $(CONTAINER_NAME) geth attach ipc:/root/.ethereum/$(NETWORK_NAME)/geth.ipc
 .PHONY: attach
