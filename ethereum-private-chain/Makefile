@@ -9,6 +9,11 @@ all: build run
 # Build docker images
 build:
 	@docker build -t $(IMAGE_NAME) .
+	@if docker image inspect $(IMAGE_NAME) > /dev/null 2>&1; then \
+		echo "\033[0;32m$(IMAGE_NAME) image is exist.\033[0m"; \
+	else \
+		docker build -t $(IMAGE_NAME) .; \
+	fi
 .PHONY: build
 
 # Running container
@@ -17,6 +22,7 @@ run:
 		--name $(CONTAINER_NAME) \
 		-v $(PWD)/.ethereum:/root/.ethereum \
 		-p $(RPC_PORT):8545 -p $(PORT):30303 \
+		--rm \
 		$(IMAGE_NAME)
 .PHONY: run
 
