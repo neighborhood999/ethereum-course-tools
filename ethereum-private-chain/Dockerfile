@@ -1,6 +1,5 @@
 FROM ethereum/client-go
 
-COPY ./genesis.json  /root/
-COPY ./build.sh .
+COPY ./build.sh ./genesis.json ./
 
 ENTRYPOINT ["./build.sh"]
