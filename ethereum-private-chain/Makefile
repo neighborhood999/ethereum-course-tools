@@ -8,7 +8,6 @@ all: build run
 
 # Build docker images
 build:
-	@docker build -t $(IMAGE_NAME) .
 	@if docker image inspect $(IMAGE_NAME) > /dev/null 2>&1; then \
 		echo "\033[0;32m$(IMAGE_NAME) image is exist.\033[0m"; \
 	else \
