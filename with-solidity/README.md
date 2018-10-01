@@ -14,7 +14,7 @@ Check container status:
 $ docker ps
 
 CONTAINER ID        IMAGE                                          COMMAND             CREATED             STATUS              PORTS                                                                   NAMES
-13a75e2c4cc1        neighborhood999/ethereum-private-chain:1.0.0   "./build.sh"        15 seconds ago      Up 14 seconds       0.0.0.0:8545->8545/tcp, 0.0.0.0:30303->30303/tcp, 8546/tcp, 30303/udp   ethereum-private-node
+13a75e2c4cc1        neighborhood999/ethereum-private-chain:1.0.0   "./entrypoint.sh"        15 seconds ago      Up 14 seconds       0.0.0.0:8545->8545/tcp, 0.0.0.0:30303->30303/tcp, 8546/tcp, 30303/udp   ethereum-private-node
 ```
 
 ## Solidity
