@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  ganache:
+    build:
+      context: ./ganache
+    ports:
+        - 8545:8545
+  truffle:
+    build:
+      context: ./truffle
+    command: sh
+    stdin_open: true
+    tty: true
+    ports:
+      - 8080:8080
+    volumes:
+      - ./truffle/app:/app
